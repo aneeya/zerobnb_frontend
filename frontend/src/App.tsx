@@ -1,16 +1,15 @@
-import React, { useEffect } from "react"
-import Router from "./router/Router"
 import axios from "axios"
+import React, { useEffect } from "react"
+import GlobalStyle from "./assets/GlobalStyle"
+import Router from "./router/Router"
 
 function App() {
-	useEffect(() => {
-		axios
-			.get("/")
-			.then((response) => console.log(response.status))
-			.catch((error) => console.log(error))
-	}, [])
-
-	return <Router />
+	return (
+		<>
+			<GlobalStyle/>
+			<Router/>
+		</>
+	)
 }
 
 export default App

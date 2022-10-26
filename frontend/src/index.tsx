@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import Loading from './components/common/Loading';
+// import Loading from './components/common/Loading';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -17,9 +17,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <QueryClientProvider client={queryClient}>
-    <Suspense fallback={<Loading />}>
+    {/* <Suspense fallback={<Loading />}> */}
       <App />
-    </Suspense>
+    {/* </Suspense> */}
   </QueryClientProvider>
 );
 

@@ -1,0 +1,40 @@
+{
+  "users": [
+    {
+      "id": 0,
+      "name": "Julia Freeman",
+      "email": "juliafreeman@gink.com",
+      "password": "wdfc955321"
+    },
+    {
+      "id": 1,
+      "name": "Crane Burch",
+      "email": "craneburch@gink.com",
+      "password": "grsd8562"
+    },
+    {
+      "id": 2,
+      "name": "Chris Reed",
+      "email": "chrisreed@gink.com",
+      "password": "kiel66936"
+    },
+    {
+      "email": "aneeya@naver.com",
+      "name": "aneeya",
+      "password": "abc12345",
+      "id": 3
+    },
+    {
+      "email": "abc@naver.com",
+      "name": "zero",
+      "password": "zero1356",
+      "id": 4
+    },
+    {
+      "email": "jjangu@zerobnb.com",
+      "name": "shinjjan",
+      "password": "jjang7956",
+      "id": 5
+    }
+  ]
+}

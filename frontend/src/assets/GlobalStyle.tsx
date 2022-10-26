@@ -5,10 +5,10 @@ const GlobalStyle = createGlobalStyle`
 ${reset}
 :root {
   /* Color styles */
---main-color1: #fc797f;
+--main-color1: #7b9bdb;
 --main-color2: #4b557c;
 
---main-color1-1: #e06c71;
+--main-color1-1: #293147;
 
 --main-color2-0: #a6adce;
 --main-color2-1: #7a82a8;
@@ -25,10 +25,11 @@ ${reset}
 --color-gray2: #7d7d7d;
 --color-gray3: #515151;
 
+--color-red: #ff5d55;
 
 --base-size: 10px;
 --font-family-lato: 'Lato', sans-serif;
---font-family-noto: 'Noto Sans KR', sans-serif;
+--font-family: '맑은고딕', 'Malgun Gothic', serif;
 }
 
 html {
@@ -40,6 +41,8 @@ html {
 *::after {
   box-sizing: border-box;
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 body {

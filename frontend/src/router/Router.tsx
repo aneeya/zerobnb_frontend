@@ -1,33 +1,27 @@
-import React from "react"
+import { useEffect, useState } from "react"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Header from "../pages/Header"
-import LoginPage from "../pages/LoginPage"
-import LogoutPage from "../pages/LogoutPage"
-import SignupPage from "../pages/SignupPage"
-import MainPage from "../pages/MainContainerPage"
-import RoomRegisterContext from "../store/RoomRegisterContext"
-import HostMainPage from "../pages/HostMainPage"
-import RoomRegisterPage from "../pages/RoomRegisterPage"
-import HostUpdatePage from "../pages/HostUpdatePage"
-import HostTab from "../pages/HostTab"
-import HostRegisterPage from "../pages/HostRegisterPage"
+import Header from "../components/areas/Header"
+import FormLayout from "../components/layout/FormLayout"
+import ItineraryForm from "../form/ItineraryForm"
+import JoinForm from "../form/JoinForm"
+import MainPage from "../pages/MainPage"
 
 const Router = () => {
+	const [ active, setActive ] =  useState(false)
+
+	useEffect(() => {
+		const key = window.localStorage.getItem('key')
+		if(key !== null) setActive(true)
+		else setActive(false)
+	}, [])
+
 	return (
 		<BrowserRouter>
-			{/* <RoomRegisterContext> */}
 			<Routes>
-				<Route path="/" element={<Header />}>
-					<Route path="MainContainerPage" element={<MainPage />} />
-					<Route path="LoginPage" element={<LoginPage />} />
-					<Route path="LogoutPage" element={<LogoutPage />} />
-					<Route path="SignupPage" element={<SignupPage />} />
-					<Route path="Host" element={<HostTab />} >
-						<Route path="HostMainPage" element={<HostMainPage />} />
-						<Route path="HostRegisterPage" element={<HostRegisterPage />} />
-						<Route path="HostUpdatePage" element={<HostUpdatePage />} />
-						<Route path="RoomRegisterPage" element={<RoomRegisterPage />} />
-					</Route>
+				<Route path="/" element={<Header active={active}/>}>
+					<Route path="/" element={<MainPage />}/>
+					<Route path="join" element={<FormLayout title='회원가입' render={<JoinForm />} />} />
+					<Route path="itinerary" element={<FormLayout title='여행 일정 등록' render={<ItineraryForm/>} />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>
