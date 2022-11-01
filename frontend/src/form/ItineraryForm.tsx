@@ -18,21 +18,12 @@ const initValue = {
   postId: window.localStorage.getItem('key')
 }
 export default function ItineraryForm() {
-  console.log('안녕 저는 여행일정 컴포넌트 입니다')
   const [ schedule, setSchedule ] = useState(initValue) 
   const [ limitCost, setLimitCost ] = useState('')
 
   const nav = useNavigate()
 
   const isCalendar = document.querySelector('#calendar') as HTMLDivElement
-
-  const removeCalender = (e: MouseEvent) => {
-    e.preventDefault()
-    const target = e.target as HTMLDivElement
-    if(target.id === 'date' || target === isCalendar)  return
-    if(isCalendar?.contains(target)) return
-    isCalendar.style!.display = 'none'
-  }
 
   const { data, status } = useQuery(['@countries'], getCountries)
   if(status === 'error') alert('여행지 데이터를 가져오지 못했습니다')
@@ -76,11 +67,7 @@ export default function ItineraryForm() {
     isCalendar.style!.display = 'none'
   }
   
-  if(isCalendar) {
 
-    document.body.addEventListener('click', (e) => removeCalender(e))
-  }
-  
 //만약에 돔이 이곳에 document를 작성할경우, style값이 읽히지 않음 이벤트가 함수가 먼저 선언되고 dom이 그려짐
 // 즉 해당 값이 읽이지 않음 if문을 통해 값이 존재할 경우에 이벤트를 호출해야함
  
@@ -103,23 +90,23 @@ export default function ItineraryForm() {
               required
               onChange={changeValue}/>
           </S.Label>
-            <S.Dates style={{display: "flex"}}>
-              <S.DateLabel>
-                start Date
-                <S.SelectDate>
-                  <S.DateButton role="button" id="date" src={ico} alt="여행 시작 날짜를 선택하세요" onClick={startPickOpen}/>
-                  <S.DateInput type="text" id="startDate" name="startDate" defaultValue={schedule.startDate}/>
-                </S.SelectDate>  
-              </S.DateLabel>
-              <S.DateLabel>
-                end Date
-                <S.SelectDate>
-                  <S.DateButton role="button" id="date" src={ico} alt="여행 마지막 날짜를 선택하세요" onClick={endPickOpen}/>
-                  <S.DateInput type="text" id="endDate" name="endDate" defaultValue={schedule.endDate}/>
-                </S.SelectDate>
-                <S.Calendar id="calendar"><Calendar pickData={pickData}/></S.Calendar>
-              </S.DateLabel>
-            </S.Dates>
+          <S.Dates>
+            <S.DateLabel>
+              start Date
+              <S.SelectDate>
+                <S.DateButton role="button" id="date" src={ico} alt="여행 시작 날짜를 선택하세요" onClick={startPickOpen}/>
+                <S.DateInput type="text" id="startDate" name="startDate" defaultValue={schedule.startDate}/>
+              </S.SelectDate>  
+            </S.DateLabel>
+            <S.DateLabel>
+              end Date
+              <S.SelectDate>
+                <S.DateButton role="button" id="date" src={ico} alt="여행 마지막 날짜를 선택하세요" onClick={endPickOpen}/>
+                <S.DateInput type="text" id="endDate" name="endDate" defaultValue={schedule.endDate}/>
+              </S.SelectDate>
+              <S.Calendar id="calendar"><Calendar pickData={pickData}/></S.Calendar>
+            </S.DateLabel>
+          </S.Dates>
           <S.Label>
             여행지
             <S.SelectDiv>
@@ -160,7 +147,7 @@ export default function ItineraryForm() {
           </S.Label>
         </S.LabelDiv>
         <S.ButtonDiv>
-          <Button type="submit" text="등록" onClick={() => console.log(schedule)}/>
+          <Button type="submit" text="등록" />
           <Button type="button" text="취소" onClick={() => nav('/')}/>
         </S.ButtonDiv>
       </S.Form>
