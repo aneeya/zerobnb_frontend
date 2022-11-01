@@ -19,7 +19,7 @@ const Router = () => {
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<Header active={active}/>}>
-					<Route path="/" element={<MainPage />}/>
+					<Route path="/" element={<MainPage active={active}/>}/>
 					<Route path="join" element={<FormLayout title='회원가입' render={<JoinForm />} />} />
 					<Route path="itinerary" element={<FormLayout title='여행 일정 등록' render={<ItineraryForm/>} />} />
 				</Route>

@@ -5,9 +5,12 @@ import styled from "styled-components"
 
 import logo from "../../assets/logo.png"
 import LoginForm from "../../form/LoginForm"
-import { Logout } from "../../HostAPI/LoginAndJoin_axios"
 
-export default function Header({active}: {active: boolean}) {
+export interface Active {
+  active: boolean
+}
+
+export default function Header({active}: Active) {
   const [ openLogin, setOpenLogin ] = useState(false)
   const [ userName, setUserName ] = useState('')
   const nav = useNavigate()
@@ -15,7 +18,7 @@ export default function Header({active}: {active: boolean}) {
   const logout = () => {
     const key = window.localStorage.getItem('key')
     window.localStorage.clear()
-    window.location.reload()
+    window.location.replace('http://localhost:3000')
   }
 
   useEffect(() => {
@@ -31,7 +34,7 @@ export default function Header({active}: {active: boolean}) {
       <S.Header>
         <S.Div>
           <div>
-            <S.Home src={logo} alt="홈으로가기" role="button"/>
+            <S.Home src={logo} alt="홈으로가기" role="button" onClick={() => nav('/')}/>
           </div>
           <S.LoginDiv>
             {active 

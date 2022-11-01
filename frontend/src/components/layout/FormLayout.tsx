@@ -29,7 +29,6 @@ S.Back = styled.div`
   height: 85rem;
   padding-top: 8rem;
   background: var(--main-color1-1);
-  overflow: hidden;
 `
 S.Logo = styled.img`
   display: block;

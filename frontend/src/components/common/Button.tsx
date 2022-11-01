@@ -3,12 +3,13 @@ import styled from "styled-components"
 interface Props {
 	type: 'button' | 'submit' | 'reset'
 	text: string,
-	onClick?: () => void
+	onClick?: () => void,
+	disAbled?: boolean
 }
 
-export default function Button({type, text, onClick}: Props) {
+export default function Button({type, text, onClick, disAbled}: Props) {
 	return (
-		<S.Button type={type} onClick={onClick}>{text}</S.Button>
+		<S.Button type={type} onClick={onClick} disabled={disAbled}>{text}</S.Button>
 	)
 }
 

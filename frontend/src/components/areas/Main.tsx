@@ -3,10 +3,28 @@ import styled from "styled-components"
 import logo from "../../assets/logo2.png"
 import carrier from "../../assets/icons/carrier.png"
 import mainimg from "../../assets/mainimg.jpg"
+import { useNavigate } from "react-router-dom"
+import { Active } from "./Header"
+import MainTab from "./MainTab"
+import PopupLayout from "../layout/PopupLayout"
+import StoredDates from "../component/StoredDates"
+import { useEffect, useState } from "react"
+import DdayNotice from "../component/DdayNotice"
+import { useQuery } from "@tanstack/react-query"
+import { getPinedList } from "../../HostAPI/TravelMange_axios"
 
-export default function Main() {
+export default function Main({active}: Active) {
+  const [ popup, setPopup ] = useState(false)
+  const nav = useNavigate()
+
+  const travelId = window.localStorage.getItem('travelId')
+    
+console.log('hi')
+
+
   return (
     <>
+      {popup && <PopupLayout render={<StoredDates onClick={() => setPopup(false)}/>}/>}
       <S.Main theme={mainimg}>
          <S.Background theme={mainimg}/>
          <S.Guide type='button'>
@@ -22,13 +40,15 @@ export default function Main() {
               <S.Des>예약하세요</S.Des>
             </S.DesDiv>
           </S.H2>
-          <S.AddButton type="button">
+          <S.AddButton type="button" onClick={() => active? nav('/itinerary') : alert('로그인해주세요!')}>
             <S.PlusText>+</S.PlusText>
             여행 일정 등록
           </S.AddButton>
-          <S.SelectButton type="button"><S.Ico src={carrier} alt="아이콘"/>나의 일정 선택</S.SelectButton>
+          <S.SelectButton type="button" onClick={() => setPopup(true)}><S.Ico src={carrier} alt="아이콘"/>나의 일정 선택</S.SelectButton>
          </S.MainDiv>
+         {travelId !== null ? <DdayNotice/> : null}
       </S.Main>
+      <MainTab/>
     </>
   )
 }

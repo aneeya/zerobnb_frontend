@@ -35,6 +35,7 @@ export const Login = (loginData: Login) => {
     if(result) {
       console.log(result)
       window.localStorage.setItem('name', result.name)
+      window.localStorage.setItem('email', result.email)
       window.localStorage.setItem('key', result.id)
       window.location.replace('http://localhost:3000/')
     } else {
@@ -46,18 +47,6 @@ export const Login = (loginData: Login) => {
   .catch(e => alert(e.message))
 } 
 
-export const active = (result: Active) => {
-  const res = axios.put(`http://localhost:4000/users/${result.id}`, {...result, active: true})
-  res.then(res => {
-    window.localStorage.setItem('name', res.data.name)
-    window.localStorage.setItem('active', res.data.active)
-    window.localStorage.setItem('key', res.data.id)
-  })
-} 
-
-export const Logout = async(id: string) => {
-  await axios.patch(`http://localhost:4000/users/${id}`, {active: false})
-}
 
 export const JoinUser = async(data: NewUser) => {
   try{
