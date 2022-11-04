@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { ChangeEvent, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import haus from "../../assets/haus.png"
 import pin from "../../assets/icons/pin.png"
@@ -16,6 +17,7 @@ export function ReservationBox({list, id, initState}: Props) {
   const [ pinState, setPinState ] = useState(initState)
   const [ pinStateAtive, setPinStateActive ] = useState(false)
   const queryClient = useQueryClient()
+  const nav = useNavigate()
 
   const addMutation = useMutation(() => postPinedRoom(id, list), {
       onError: (e: any) => {
@@ -35,6 +37,7 @@ export function ReservationBox({list, id, initState}: Props) {
         setPinState(!pinState)
       },
     })
+    
   // let timer: any
 
 
@@ -54,6 +57,8 @@ export function ReservationBox({list, id, initState}: Props) {
     setPinStateActive(true)
   }
 
+  
+
   useEffect(() => {
     if(pinState && pinStateAtive) {
       console.log(pinStateAtive)
@@ -71,7 +76,7 @@ export function ReservationBox({list, id, initState}: Props) {
           <R.Pin role="button" aria-label="저장핀" theme={pinState? pined : pin} onClick={clickPinHandle}/>
           <R.H3>{list.name}</R.H3>
           <R.Des>{list.description}</R.Des>
-          <R.Button type="button">상세보기</R.Button>
+          <R.Button type="button" onClick={() => nav(String(list.id))}>상세보기</R.Button>
         </R.Content>
       </R.Rayout>
     </>

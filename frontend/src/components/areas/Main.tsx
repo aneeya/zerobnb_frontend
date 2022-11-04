@@ -19,8 +19,6 @@ export default function Main({active}: Active) {
 
   const travelId = window.localStorage.getItem('travelId')
     
-console.log('hi')
-
 
   return (
     <>

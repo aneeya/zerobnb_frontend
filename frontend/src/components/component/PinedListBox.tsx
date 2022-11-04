@@ -6,6 +6,7 @@ import haus from "../../assets/haus.png"
 import pined from "../../assets/icons/pin2.png"
 import ConfirmLayout from "../layout/ConfirmLayout"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { useNavigate } from "react-router-dom"
 
 interface Props {
   list: Room
@@ -14,6 +15,7 @@ interface Props {
 
 export default function PinedListBox({list, clickUpdate}: Props) {
   const [ memo, setMemo ] = useState(false)
+  const nav = useNavigate()
 
   const queryClient = useQueryClient()
   const subMutation = useMutation(() => deletePinedRoom(Number(list.id)), {
@@ -51,7 +53,7 @@ export default function PinedListBox({list, clickUpdate}: Props) {
         <R.Pin role="button" aria-label="저장핀"  onClick={clickConfirm}/>
         <R.H3>{list.name}</R.H3>
         <R.Des>{list.description}</R.Des>
-        <R.Button type="button">상세보기</R.Button>
+        <R.Button type="button" onClick={() => nav(String(list.id))}>상세보기</R.Button>
       </R.Content>
     </R.Rayout>
     <R.Memo>

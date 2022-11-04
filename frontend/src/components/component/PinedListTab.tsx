@@ -1,21 +1,16 @@
-import { useQuery, useQueryClient, UseQueryResult } from "@tanstack/react-query"
-import { AxiosResponse } from "axios"
-import { useEffect, useState } from "react"
+import { useQueryClient} from "@tanstack/react-query"
+import { useState } from "react"
 import styled from "styled-components"
-import { getPinedList, Room, Travel } from "../../HostAPI/TravelMange_axios"
-import ConfirmLayout from "../layout/ConfirmLayout"
+import { Room } from "../../HostAPI/TravelMange_axios"
 import PinedListBox from "./PinedListBox"
-import { ReservationBox } from "./ReservationBox"
 
-interface Props {
-  travelId?: string
-}
 
-export default function PinedListTab({travelId}: Props) {
+
+export default function PinedListTab() {
   const queryClient = useQueryClient()
   const queryData = queryClient.getQueryData(['@pined']) as any
   const getInit = queryData.data.pineds
-
+  console.log(queryData)
   const [ pinedList, setPinedList ] = useState(getInit)  
 
   const clickUpdate = (id: number) => {

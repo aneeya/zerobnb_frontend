@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useState, MouseEvent } from "react";
 import styled from "styled-components";
 import Button from "../components/common/Button";
-import { Login } from "../HostAPI/LoginAndJoin_axios";
+import { Login, useLogin } from "../HostAPI/LoginAndJoin_axios";
 
 interface Props {
   onClick: () => void
@@ -9,14 +9,26 @@ interface Props {
 
 export default function LoginForm({onClick}: Props) {
   const [ login, setLogin ] = useState({email: "", password: ""})
-
+  const{ data } = useLogin() 
+  
   const changeValue = (e: ChangeEvent<HTMLInputElement>) => {
     setLogin({ ...login, [e.target.name]: e.target.value })
   }
 
   const submitValue = async(e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
-    Login(login) 
+    const result = data?.data.filter((user: Login) => {
+        return user.email === login.email && user.password === login.password})
+      
+    if(result !== null) {
+      window.localStorage.setItem('key', result[0].id)
+      window.localStorage.setItem('email', result[0].email)
+      window.localStorage.setItem('name', result[0].name)
+      window.location.replace('http://localhost:3000/')
+      
+    }
+    else alert('이메일 및 패스워드가 확인되지 않습니다 다시 입력해주세요!')
+    
   }
 
   

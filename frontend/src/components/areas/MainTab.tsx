@@ -17,7 +17,7 @@ export default function MainTab() {
   const ulDom = document.querySelector('#tabList')
 
   const tabComponent = [ 
-    <PinedListTab travelId={travelId!}/>,
+    <PinedListTab />,
     'hello', 
     <ReservableTab />, 
     'halo' ]

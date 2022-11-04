@@ -14,6 +14,7 @@ export default function ReservableTab() {
   const id = window.localStorage.getItem('travelId')
 
   const { data } = queryClient.getQueryData(['@pined']) as any
+  console.log(data)
   const pinedIds = data.pineds.map( (list: { id: number }) => list.id)
 
   useEffect(() => {

@@ -26,6 +26,13 @@ export interface Room {
   memo?: string,
   travelId?: number
 }
+
+export interface Reserve extends Room {
+  checkIn?: string,
+  checkOut?: string,
+  total?: string
+}
+
 export interface ReservaionList extends Travel {
   store: Room[] | [],
   reserved: Room[] | [],
@@ -77,3 +84,59 @@ export const getPinedList = async(id: number) => {
   return await axios.get(`http://localhost:4000/travels/${id}?_embed=pineds`)
 }
 
+export const useGetPinedList = (id: number) => {
+  return useQuery(['@pined'], () => getPinedList(id))
+}
+
+//핀리스트 쿼리
+export const useAddPinedList = (id: number, data: Room) => {
+  const query = useQueryClient()
+  return useMutation(() => postPinedRoom(id, data), {
+    onError: (e: any) => {
+      alert(`${e.message}핀을 저장하지 못했습니다`)
+    },
+    onSuccess: () => {
+      query.invalidateQueries(['@pined'])
+    }
+  })
+}
+
+export const useSubPinedList = (id: number) => {
+  const query = useQueryClient()
+  return useMutation(() => deletePinedRoom(Number(id)), {
+    onSuccess: () => {
+      query.invalidateQueries(['@pined'])
+    },
+    onError: (e: any) => {
+      alert('저장실패')
+    },
+  })
+}
+
+//방 상세보기 
+const getDetailView = async(id: number) => {
+  return await axios.get(`http://localhost:4000/rooms/${id}`)
+} 
+
+export const useDetailView = (id: number) => {
+  return useQuery([], () => getDetailView(id), {
+    onError: (e: any) => {
+      alert(e.message)
+    }
+  })
+}
+
+//예약하기
+
+const postReserve = async(data: Reserve, travelId: string) => {
+  data.travelId = Number(travelId)
+  return await axios.post('http://localhost:4000/reserves', data)
+}
+
+export const queryReserve = (data: Reserve, travelId: string) => {
+  return useMutation(() => postReserve(data, travelId), {
+    onError: (e: any) => {
+      alert(`${e.message} 예약하는데 실패했습니다`)
+    },
+  })
+}

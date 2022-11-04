@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { Outlet, useNavigate } from "react-router-dom"
 
 import styled from "styled-components"
@@ -71,6 +71,7 @@ const S: any = {}
 S.Header = styled.header`
   width: 100%;
   height: 8rem;
+  box-shadow: 0 1px 2px var(--color-gray0);
 `
 S.Div = styled.div`
   display: flex;
