@@ -41,8 +41,12 @@ export default function PinedListTab() {
 const S: any = {}
 
 S.Messge = styled.div`
+  width: 30rem;
+  margin: 0 auto;
+  margin-bottom: 5rem;
   color: var(--main-color1);
-  font-weight: 800;
+  font-weight: 600;
+  font-size: 2rem;
 `
 S.Confirm = styled.div`
   display: none;

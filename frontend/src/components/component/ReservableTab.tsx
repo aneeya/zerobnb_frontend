@@ -56,6 +56,10 @@ S.Div = styled.div`
   margin-bottom: 2rem;
 `
 S.Messge = styled.div`
+  width: 30rem;
+  margin: 0 auto;
+  margin-bottom: 5rem;
   color: var(--main-color1);
-  font-weight: 800;
+  font-weight: 600;
+  font-size: 2rem;
 `

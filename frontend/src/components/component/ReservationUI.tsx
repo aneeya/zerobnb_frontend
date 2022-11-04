@@ -1,7 +1,7 @@
 import { ChangeEvent, MouseEvent, useReducer, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
-import { queryReserve, Reserve } from "../../HostAPI/TravelMange_axios"
+import { Reserve, useReserve } from "../../HostAPI/TravelMange_axios"
 import Button from "../common/Button"
 
 interface Props {
@@ -55,7 +55,7 @@ export default function ReservationUI({data, room}: Props) {
     checkOut: reserve.checkOut, 
     total: reserve.total,
   }
-  const mutation = queryReserve(postData, travelId!)
+  const mutation = useReserve(postData, travelId!)
 
   const clickNth = (e: MouseEvent<HTMLButtonElement>) => {
     const target = e.target as HTMLButtonElement
@@ -67,10 +67,6 @@ export default function ReservationUI({data, room}: Props) {
   const submitValue = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
     mutation.mutate()
-    if(!mutation.isSuccess) {
-      alert('예약이 완료되었습니다')
-      // nav('/')
-    }
   }
  
 

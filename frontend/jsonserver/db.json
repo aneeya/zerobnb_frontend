@@ -218,7 +218,8 @@
       "nthOfPeople": 4,
       "hompage": "http://ucoz.ru/aliquam/non/mauris/morbi/non/lectus/aliquam.json?dolor=nulla&quis=suspendisse&odio=potenti&consequat=cras&varius=in&integer=purus&ac=eu&leo=magna&pellentesque=vulputate&ultrices=luctus&mattis=cum&odio=sociis&donec=natoque&vitae=penatibus&nisi=et&nam=magnis&ultrices=dis&libero=parturient&non=montes&mattis=nascetur&pulvinar=ridiculus&nulla=mus&pede=vivamus&ullamcorper=vestibulum&augue=sagittis&a=sapien&suscipit=cum&nulla=sociis&elit=natoque&ac=penatibus&nulla=et&sed=magnis&vel=dis&enim=parturient&sit=montes&amet=nascetur&nunc=ridiculus&viverra=mus&dapibus=etiam&nulla=vel&suscipit=augue&ligula=vestibulum&in=rutrum&lacus=rutrum",
       "description": "odio odio elementum eu interdum eu tincidunt in leo maecenas pulvinar lobortis est phasellus sit amet erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin eu mi nulla ac enim in tempor turpis nec euismod scelerisque quam turpis adipiscing lorem vitae mattis nibh ligula nec sem duis aliquam convallis nunc proin at turpis a pede posuere nonummy integer non velit donec diam neque vestibulum eget vulputate ut ultrices vel augue vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae donec pharetra magna vestibulum aliquet ultrices erat tortor sollicitudin mi sit amet lobortis sapien sapien non mi integer ac neque duis bibendum morbi non quam nec dui luctus rutrum nulla tellus in sagittis dui vel nisl duis ac nibh fusce lacus purus aliquet at feugiat non pretium quis lectus suspendisse potenti in eleifend quam a odio in hac habitasse platea dictumst maecenas ut massa quis augue luctus tincidunt nulla mollis molestie lorem quisque ut erat curabitur gravida nisi at nibh in hac habitasse platea dictumst aliquam augue quam sollicitudin vitae consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum praesent blandit lacinia erat vestibulum sed magna at nunc commodo placerat praesent blandit nam nulla integer pede justo lacinia eget tincidunt eget",
-      "travelId": 11
+      "travelId": 11,
+      "memo": "가성비 좋고 넓다"
     },
     {
       "id": 59,
@@ -248,24 +249,7 @@
       "travelId": 11
     }
   ],
-  "reserves": [
-    {
-      "id": 9,
-      "name": "Wunsch and Sons",
-      "city": "Turkey",
-      "hostName": "Codi Linnard",
-      "phone": "618-364-9014",
-      "price": "46275",
-      "images": "http://dummyimage.com/271x158.png/ff4444/ffffff",
-      "nthOfPeople": 4,
-      "hompage": "http://ucoz.ru/aliquam/non/mauris/morbi/non/lectus/aliquam.json?dolor=nulla&quis=suspendisse&odio=potenti&consequat=cras&varius=in&integer=purus&ac=eu&leo=magna&pellentesque=vulputate&ultrices=luctus&mattis=cum&odio=sociis&donec=natoque&vitae=penatibus&nisi=et&nam=magnis&ultrices=dis&libero=parturient&non=montes&mattis=nascetur&pulvinar=ridiculus&nulla=mus&pede=vivamus&ullamcorper=vestibulum&augue=sagittis&a=sapien&suscipit=cum&nulla=sociis&elit=natoque&ac=penatibus&nulla=et&sed=magnis&vel=dis&enim=parturient&sit=montes&amet=nascetur&nunc=ridiculus&viverra=mus&dapibus=etiam&nulla=vel&suscipit=augue&ligula=vestibulum&in=rutrum&lacus=rutrum",
-      "description": "odio odio elementum eu interdum eu tincidunt in leo maecenas pulvinar lobortis est phasellus sit amet erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin eu mi nulla ac enim in tempor turpis nec euismod scelerisque quam turpis adipiscing lorem vitae mattis nibh ligula nec sem duis aliquam convallis nunc proin at turpis a pede posuere nonummy integer non velit donec diam neque vestibulum eget vulputate ut ultrices vel augue vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae donec pharetra magna vestibulum aliquet ultrices erat tortor sollicitudin mi sit amet lobortis sapien sapien non mi integer ac neque duis bibendum morbi non quam nec dui luctus rutrum nulla tellus in sagittis dui vel nisl duis ac nibh fusce lacus purus aliquet at feugiat non pretium quis lectus suspendisse potenti in eleifend quam a odio in hac habitasse platea dictumst maecenas ut massa quis augue luctus tincidunt nulla mollis molestie lorem quisque ut erat curabitur gravida nisi at nibh in hac habitasse platea dictumst aliquam augue quam sollicitudin vitae consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum praesent blandit lacinia erat vestibulum sed magna at nunc commodo placerat praesent blandit nam nulla integer pede justo lacinia eget tincidunt eget",
-      "checkIn": "2022-11-16",
-      "checkOut": "2022-11-19",
-      "total": "138,825원",
-      "travelId": 11
-    }
-  ],
+  "reserves": [],
   "pasts": [],
   "countries": [
     {

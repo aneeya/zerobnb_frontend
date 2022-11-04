@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
 export interface Travel {
   email: string,
@@ -73,6 +74,22 @@ export const postPinedRoom = async(id: number, data: Room) => {
   return await axios.post(`http://localhost:4000/pineds/`, data)
 } 
 
+//핀리스트 수정(메모)
+const patchPinedMemo = async(id: number, memo: string) => {
+  return await axios.patch(`http://localhost:4000/pineds/${id}`, {memo: memo})
+}
+
+export const useEditMemo = (id: number, memo: string) => {
+  const query = useQueryClient()
+  return useMutation(() => patchPinedMemo(id, memo), {
+    onError: (e: any) => {
+      alert(`${e.message} 메모를 수정하지 못했습니다`)
+    },
+    onSuccess: () => {
+      query.invalidateQueries(['@pined'])
+    }
+  })
+}
 
 //핀리스트 삭제
 export const deletePinedRoom = async(id: number) => {
@@ -133,10 +150,46 @@ const postReserve = async(data: Reserve, travelId: string) => {
   return await axios.post('http://localhost:4000/reserves', data)
 }
 
-export const queryReserve = (data: Reserve, travelId: string) => {
+export const useReserve = (data: Reserve, travelId: string) => {
+  const nav = useNavigate()
   return useMutation(() => postReserve(data, travelId), {
     onError: (e: any) => {
       alert(`${e.message} 예약하는데 실패했습니다`)
     },
+    onSuccess: () => {
+      alert('예약이 완료 되었습니다!')
+      nav('/')
+    }
+  })
+}
+
+//예약목록
+
+const getReserve = async() => {
+  const travelId = window.localStorage.getItem('travelId')
+  return await axios.get(`http://localhost:4000/travels/${travelId}?_embed=reserves`)
+}
+
+export const useReserveList = () => {
+  return useQuery(['@reserve'], () => getReserve(), {
+    onError: (e: any) => {
+      alert(`${e.message} 예약목록을 가져오지 못했습니다`)
+    }
+  })
+}
+
+//예약삭제
+const deleteReserve = async(id: number) => {
+  return await axios.delete(`http://localhost:4000/reserves/${id}`)
+}
+
+export const useReserveDelete = (id: number) => {
+  const query = useQueryClient()
+  return useMutation(() => deleteReserve(id), {
+    onSuccess: () => {
+      query.invalidateQueries(['@reserve'])
+      alert('예약이 취소 되었습니다!')
+      query.refetchQueries(['@reserve'])
+    }
   })
 }
