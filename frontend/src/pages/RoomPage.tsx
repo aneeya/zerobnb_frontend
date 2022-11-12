@@ -11,6 +11,7 @@ import { useDetailView, useGetPinedList, useSubPinedList } from "../HostAPI/Trav
 import PopupLayout from "../components/layout/PopupLayout"
 import PinedListMemo from "../components/component/PinedListMemo"
 import ReservationUI from "../components/component/ReservationUI"
+import Recommendation from "../components/component/Recommendation"
 
 
 
@@ -89,6 +90,7 @@ export default function RoomPage() {
                 <S.RoomP>{data?.data.description}</S.RoomP>
               </S.RoomDes>
             </S.RoomInfo>
+            <Recommendation id={Number(param.room)}/>
           </S.Info>
           <ReservationUI 
             data={pineds.data?.data !== undefined ? pineds.data?.data : ''}

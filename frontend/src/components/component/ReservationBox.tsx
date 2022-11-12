@@ -38,20 +38,6 @@ export function ReservationBox({list, id, initState}: Props) {
       },
     })
     
-  // let timer: any
-
-
-  // const changeMemo = (e: ChangeEvent<HTMLTextAreaElement>) => {
-  //   if(timer) clearTimeout(timer)
-  //   timer = setTimeout(() => {
-  //     list.memo = e.target.value
-  //     console.log(list.memo)
-  //   }, 500)
-  // }
-
-  const submitValue = (e: ChangeEvent<HTMLFormElement>) => {
-     
-  }
   const clickPinHandle = () => {
     setPinState(!pinState)
     setPinStateActive(true)

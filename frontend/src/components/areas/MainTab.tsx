@@ -5,6 +5,7 @@ import { getPinedList, getReservable, getStoredDates, ReservaionList } from "../
 import PinedListTab from "../component/PinedListTab";
 import ReservableTab from "../component/ReservableTab";
 import ReservedRoomTab from "../component/ReservedRoomTab";
+import TravelDiaryTab from "../component/TravelDiaryTab";
 
 export default function MainTab() {
   const travelId = window.localStorage.getItem('travelId')
@@ -32,7 +33,7 @@ export default function MainTab() {
         setTab(<ReservableTab />)
         return
       case "후기 관리":
-        setTab('halo' )
+        setTab(<TravelDiaryTab />)
     }
     
   }

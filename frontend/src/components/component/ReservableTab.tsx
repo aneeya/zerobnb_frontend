@@ -1,8 +1,7 @@
-import { useQuery, useQueryClient, UseQueryResult } from "@tanstack/react-query";
-import { AxiosResponse } from "axios";
+import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { getPinedList, getReservable, ReservaionList, Room } from "../../HostAPI/TravelMange_axios";
+import { getReservable, Room } from "../../HostAPI/TravelMange_axios";
 import { ReservationBox } from "./ReservationBox";
 
 
@@ -12,15 +11,18 @@ export default function ReservableTab() {
 
   const country = window.localStorage.getItem('country')
   const id = window.localStorage.getItem('travelId')
+  const ended = window.localStorage.getItem('ended')
 
   const { data } = queryClient.getQueryData(['@pined']) as any
-  console.log(data)
+
   const pinedIds = data.pineds.map( (list: { id: number }) => list.id)
 
   useEffect(() => {
-    const getList = getReservable(country!)
-    getList.then(res => setReservable(res.data))
-    .catch(e => alert(`${e.message}예약 가능한 숙소를 로드하지 못했습니다`))
+    if(Number(ended) >= 0){
+      const getList = getReservable(country!)
+      getList.then(res => setReservable(res.data))
+      .catch(e => alert(`${e.message}예약 가능한 숙소를 로드하지 못했습니다`))
+    }
   }, [])
   
   return (
@@ -29,11 +31,11 @@ export default function ReservableTab() {
      ?
       reservable.map((list: Room) => {
         const initState = pinedIds.includes(list.id)
+
         return (
           <>
-          <S.Div>
-            <ReservationBox 
-              key={list.price} 
+          <S.Div key={list.name}>
+            <ReservationBox  
               list={list} 
               id={Number(id)}
               initState={initState}/>

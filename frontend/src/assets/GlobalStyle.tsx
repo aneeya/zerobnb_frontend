@@ -75,6 +75,15 @@ button:disabled {
 li {
   list-style: none;
 }
+
+.screenReader {
+  position: absolute;
+  width: 1;
+  height: 1;
+  margin: -1;
+  overflow: hidden;
+  clip-path: polygon(0 0, 0 0, 0 0);
+}
 `
 
 export default GlobalStyle

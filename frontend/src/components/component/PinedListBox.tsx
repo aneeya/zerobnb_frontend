@@ -14,6 +14,8 @@ interface Props {
 }
 
 export default function PinedListBox({list, clickUpdate}: Props) {
+  const ended = window.localStorage.getItem('ended')
+
   const [ memo, setMemo ] = useState(false)
   const [ edit, setEdit ] = useState(false)
   const [ content, setContent ] = useState('')
@@ -23,8 +25,11 @@ export default function PinedListBox({list, clickUpdate}: Props) {
   const subMutation = useMutation(() => deletePinedRoom(Number(list.id)), {
     onSuccess: () => {
       queryClient.invalidateQueries(['@pined'])
-    }
+    },
+    
   })
+
+  if(Number(ended) < 0) subMutation.mutate()
 
   const editMutation = useEditMemo(Number(list.id), content)
   

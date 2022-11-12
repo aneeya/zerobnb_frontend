@@ -40,30 +40,24 @@ export interface ReservaionList extends Travel {
   past: Room[] | []
 }
 
+export interface Diary {
+  id?: number,
+  roomId: number,
+  theme: string,
+  name: string,
+  images: string[] | [],
+  url: string,
+  description: string
+}
 //등록한 여행일정 리스트 
 export const getStoredDates = async() => {
   const email = window.localStorage.getItem('email')
   return  await axios.get(` http://localhost:4000/travels?email=${email}`)
 }
 
-// //여행일정 선택하기
-// const getSelectedDate = async(id: number) => {
-//   return await axios.get(`http://localhost:4000/travels/${id}`)
-// }
 
-// export const querySelectedDate = (id: number) => {
-//   const queryClient = useQueryClient()
-//   return useMutation(() => getSelectedDate(id), {
-//     onSuccess: (data: any) => {
-//       queryClient.setQueryData(['@itinerary', data.data.title], data.data)
-//     },
-//     onError: (e: any) => {
-//       alert(e.message)
-//     }
-//   })
-// }
 
-//예약가능한 방 불로오기
+//예약가능한 방 불러오기
 export const getReservable = async(city: string) => {
   return await axios.get(`http://localhost:4000/rooms?city=${city}`)
 }
@@ -152,13 +146,16 @@ const postReserve = async(data: Reserve, travelId: string) => {
 
 export const useReserve = (data: Reserve, travelId: string) => {
   const nav = useNavigate()
+  const query = useQueryClient()
   return useMutation(() => postReserve(data, travelId), {
     onError: (e: any) => {
       alert(`${e.message} 예약하는데 실패했습니다`)
     },
     onSuccess: () => {
+      query.invalidateQueries(['@reserve'])
       alert('예약이 완료 되었습니다!')
       nav('/')
+      query.refetchQueries(['@reserve'])
     }
   })
 }
@@ -190,6 +187,58 @@ export const useReserveDelete = (id: number) => {
       query.invalidateQueries(['@reserve'])
       alert('예약이 취소 되었습니다!')
       query.refetchQueries(['@reserve'])
+    }
+  })
+}
+
+//여행기록 남기기
+
+const postDiary = async(data: Diary) => {
+  return await axios.post(`http://localhost:4000/pasts`, data)
+}
+
+export const useDiaryRegist = (data: Diary, callback: () => void) => {
+  const query = useQueryClient()
+  return useMutation(() => postDiary(data), {
+    onError: (e: any) => {
+      alert(`${e.message}다시 시도해주세요ㅠ`)
+    },
+    onSuccess: () => {
+      query.invalidateQueries(['@travelDiary'])
+      alert('등록이 완료되었습니다')
+      callback()
+    }
+  })
+}
+
+//여행기록 리스트 불러오기
+const getDiary = async(id: number) => {
+  return await axios.get(`http://localhost:4000/pasts?roomId=${id}`)
+}
+
+export const useDiaryList = (id: number) => {
+  return useQuery(['@travelDiary'], () => getDiary(id), {
+    onError: (e: any) => {
+      alert(`${e.message}등록한 기록들을 로드하지 못했습니다`)
+    }
+  })
+}
+
+//여행기록 리스트 삭제
+const deleteDiary =  async(id: number) => {
+  return await axios.delete(`http://localhost:4000/pasts/${id}`)
+}
+
+export const useDeleteDiary = (id: number, callback:() => void) => {
+  const query = useQueryClient()
+  return useMutation(() => deleteDiary(id), {
+    onError: (e: any) => {
+      alert(`${e.message}다시 시도해주세요`)
+    },
+    onSuccess: () => {
+      query.invalidateQueries(['@travelDiary'])
+      alert('삭제되었습니다!')
+      callback()
     }
   })
 }

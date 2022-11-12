@@ -21,10 +21,11 @@ export default function StoredDates({onClick}: Props) {
   }) 
   
   
-  const changeValue= (id: number, startDate: string, country: string) => {
+  const changeValue= (id: number, startDate: string, country: string, endDate: string) => {
     window.localStorage.setItem('country', country)
     window.localStorage.setItem('travelId', String(id))
     window.localStorage.setItem('startDate', startDate)
+    window.localStorage.setItem('endDate', endDate)
     setSelect(id)
   }
     
@@ -47,7 +48,7 @@ export default function StoredDates({onClick}: Props) {
                 return (
                   <>
                     <S.Label key={key}>
-                      <S.Input type="radio" onChange={() => changeValue(id, startDate, country)}/>
+                      <S.Input type="radio" onChange={() => changeValue(id, startDate, country, endDate)}/>
                       <S.Title>{title}</S.Title>
                       <S.Date>{startDate} ~ {endDate}</S.Date>
                     </S.Label>

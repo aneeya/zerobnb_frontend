@@ -69,9 +69,14 @@ export default function Header({active}: Active) {
 const S: any = {}
 
 S.Header = styled.header`
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
   width: 100%;
   height: 8rem;
   box-shadow: 0 1px 2px var(--color-gray0);
+  background: var(--color-white);
 `
 S.Div = styled.div`
   display: flex;
