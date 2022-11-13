@@ -27,7 +27,7 @@ export default function TravelDiaryBox({list}: Props) {
     if(target.innerText !== '기록하기') nav(`/${String(list.id)}`)
   }
  
-  if(Number(ended) < -30 && recommended.length !== 0) {
+  if(Number(ended) < -30 && recommended.length === 0) {
     cancelMutation.mutate()
   }
 

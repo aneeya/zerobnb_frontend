@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
 import axios from "axios"
 
 const getRecommendation = async(id: number) => {
@@ -6,12 +6,18 @@ const getRecommendation = async(id: number) => {
 }
 
 export const useRecommendations = (id: number) => {
-  return useQuery([''], () => getRecommendation(id), {
+  const query = useQueryClient()
+  return useQuery(['@recommends'], () => getRecommendation(id), {
     onError: (e: any) => {
       alert(`${e.message}정보를 가져오지 못했습니다`)
     },
     onSuccess: (data) => {
-      console.log(data.data.pasts)
+      const recommends = data.data.pasts
+      query.setQueryData(['@recommends', '맛집'], recommends.filter( (list: { theme: string }) => list.theme === '맛집'))
+      query.setQueryData(['@recommends', '카페'], recommends.filter( (list: { theme: string }) => list.theme === '카페'))
+      query.setQueryData(['@recommends', '문화'], recommends.filter( (list: { theme: string }) => list.theme === '문화'))
+      query.setQueryData(['@recommends', '행사'], recommends.filter( (list: { theme: string }) => list.theme === '행사'))
+      query.setQueryData(['@recommends', '기타'], recommends.filter( (list: { theme: string }) => list.theme === '기타'))
     }
   })
 }

@@ -217,9 +217,18 @@ const getDiary = async(id: number) => {
 }
 
 export const useDiaryList = (id: number) => {
+  const query = useQueryClient()
   return useQuery(['@travelDiary'], () => getDiary(id), {
     onError: (e: any) => {
       alert(`${e.message}등록한 기록들을 로드하지 못했습니다`)
+    },
+    onSuccess: (data) => {
+      const recommends = data.data
+      query.setQueryData(['@travelDiary', '맛집'], recommends.filter( (list: { theme: string }) => list.theme === '맛집'))
+      query.setQueryData(['@travelDiary', '카페'], recommends.filter( (list: { theme: string }) => list.theme === '카페'))
+      query.setQueryData(['@travelDiary', '문화'], recommends.filter( (list: { theme: string }) => list.theme === '문화'))
+      query.setQueryData(['@travelDiary', '행사'], recommends.filter( (list: { theme: string }) => list.theme === '행사'))
+      query.setQueryData(['@travelDiary', '기타'], recommends.filter( (list: { theme: string }) => list.theme === '기타'))
     }
   })
 }
